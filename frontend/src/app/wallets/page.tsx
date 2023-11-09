@@ -18,6 +18,8 @@ export default function WalletsPage() {
       .then((res) => setWallets(res));
   }, []);
 
+  const totalBalance = wallets.reduce((sum, wallet) => wallet.balance + sum, 0);
+
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete?')) {
       const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
@@ -50,7 +52,12 @@ export default function WalletsPage() {
           >
             <div>
               <p>{wallet.name}</p>
-              <p>SEK {wallet.balance}</p>
+              <p>
+                {wallet.balance.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'SEK',
+                })}
+              </p>
             </div>
             <button
               className="bg-primary-700 text-white border-none shadow shadow-primary-900"
@@ -60,6 +67,13 @@ export default function WalletsPage() {
             </button>
           </div>
         ))}
+        <p className="text-xl font-bold mt-4">
+          Total balance:{' '}
+          {totalBalance.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'SEK',
+          })}
+        </p>
       </div>
     </div>
   );

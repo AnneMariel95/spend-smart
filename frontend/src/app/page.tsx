@@ -29,6 +29,11 @@ export default function ExpensesPage() {
     }
   };
 
+  const totalExpenses = expenses.reduce(
+    (sum, expense) => expense.amount + sum,
+    0
+  );
+
   return (
     <div className="p-4 w-full md:w-2/3">
       <div className="flex justify-between">
@@ -52,11 +57,16 @@ export default function ExpensesPage() {
           {expenses.map((expense) => (
             <tr key={expense.id} className="border-y-2 border-primary-600">
               <td>{expense.date}</td>
-              <td>SEK {expense.amount}</td>
               <td>{expense.category}</td>
               <td>
+                {expense.amount.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'SEK',
+                })}
+              </td>
+              <td>
                 <button
-                  className="border-none text-primary-800 bg-transparent"
+                  className="border-none text-red-500 bg-transparent"
                   onClick={() => handleDelete(expense.id)}
                 >
                   X
@@ -66,6 +76,13 @@ export default function ExpensesPage() {
           ))}
         </tbody>
       </table>
+      <p className="text-xl font-bold mt-4 text-right">
+        Total expenses:{' '}
+        {totalExpenses.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'SEK',
+        })}
+      </p>
     </div>
   );
 }
