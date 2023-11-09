@@ -2,10 +2,7 @@ package com.annemariel.backend.expense;
 
 import com.annemariel.backend.expense.dto.ExpenseResponseDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,10 @@ public class ExpenseController {
     @GetMapping
     public ResponseEntity<List<ExpenseResponseDto>> getAllExpenses() {
         return ResponseEntity.ok(expenseService.findAllExpenses());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ExpenseResponseDto> findById(@PathVariable String id) {
+        return ResponseEntity.ok(expenseService.findById(id));
     }
 }

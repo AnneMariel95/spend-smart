@@ -28,10 +28,13 @@ public class ExpenseService {
 
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-
     public List<ExpenseResponseDto> findAllExpenses() {
         List<ExpenseResponseDto> allExpenses = new ArrayList<>();
         expenseRepository.findAll().forEach(e -> allExpenses.add(new ExpenseResponseDto(e.getId(), e.getAmount(), e.getCategory(), e.getDate())));
         return allExpenses.stream().sorted(Comparator.comparing(obj -> LocalDate.parse(obj.date(), dateFormatter))).toList();
+    }
+
+    public ExpenseResponseDto findById(String id) {
+        return expenseRepository.findById(id).map(e -> new ExpenseResponseDto(e.getId(), e.getAmount(), e.getCategory(), e.getDate())).orElseThrow();
     }
 }
