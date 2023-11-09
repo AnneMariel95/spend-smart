@@ -51,6 +51,7 @@ export default function AddExpensePage() {
           <label htmlFor="date">Date: </label>
           <input
             id="date"
+            required
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
@@ -60,6 +61,7 @@ export default function AddExpensePage() {
           <label htmlFor="category">Category: </label>
           <input
             id="category"
+            required
             type="text"
             list="expenseCategories"
             placeholder="Enter Category"
@@ -79,6 +81,7 @@ export default function AddExpensePage() {
         <div>
           <label htmlFor="amount">Amount: </label>
           <input
+            required
             id="amount"
             type="number"
             min="1"
@@ -90,6 +93,7 @@ export default function AddExpensePage() {
         <div>
           <label htmlFor="wallet">Wallet: </label>
           <select
+            required
             id="wallet"
             value={walletId}
             onChange={(e) => setWalletId(e.target.value)}

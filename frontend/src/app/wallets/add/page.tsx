@@ -34,6 +34,7 @@ export default function AddWalletPage() {
           <label htmlFor="name">Name: </label>
           <input
             id="name"
+            required
             type="text"
             value={name}
             placeholder="Enter name"
@@ -44,6 +45,7 @@ export default function AddWalletPage() {
           <label htmlFor="balance">Balance: </label>
           <input
             id="balance"
+            required
             type="number"
             placeholder="Enter Balance"
             value={balance}
