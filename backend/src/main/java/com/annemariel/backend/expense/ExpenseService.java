@@ -60,4 +60,8 @@ public class ExpenseService {
         expenseRepository.save(expense);
         return new ExpenseResponseDto(expense.getId(), expense.getAmount(), expense.getCategory(), expense.getDate());
     }
+
+    public void deleteExpenseById(String id) {
+        expenseRepository.deleteById(id);
+    }
 }
