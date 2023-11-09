@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  border-radius: 4px;
+}
+
+button {
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: white;
+}
+
+th {
+  text-align: left;
+}
+
+label {
+  display: block;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 4px;
+}
