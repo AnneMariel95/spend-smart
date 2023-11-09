@@ -1,0 +1,6 @@
+package com.annemariel.backend.user;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface UserRepository extends CrudRepository<User, String> {
+}
