@@ -45,4 +45,8 @@ public class WalletService {
         walletRepository.save(wallet);
         return new WalletResponseDto(wallet.getId(), wallet.getName(), wallet.getBalance());
     }
+
+    public void deleteWalletById(String id) {
+        walletRepository.deleteById(id);
+    }
 }

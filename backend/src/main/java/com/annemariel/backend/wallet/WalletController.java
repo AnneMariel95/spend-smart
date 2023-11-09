@@ -2,6 +2,8 @@ package com.annemariel.backend.wallet;
 
 import com.annemariel.backend.wallet.dto.WalletRequestDto;
 import com.annemariel.backend.wallet.dto.WalletResponseDto;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +40,15 @@ public class WalletController {
     @PutMapping("/{id}")
     public ResponseEntity<WalletResponseDto> updateWallet(@PathVariable String id, @RequestBody WalletRequestDto dto) {
         return ResponseEntity.ok(walletService.updateWallet(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteWalletById(@PathVariable String id) {
+        try {
+            walletService.deleteWalletById(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.badRequest().body("Cannot delete wallet with associated expenses");
+        }
     }
 }
