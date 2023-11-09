@@ -36,7 +36,7 @@ export default function WalletsPage() {
 
   return (
     <div className="p-4 w-full">
-      <div className="flex justify-between px-5">
+      <div className="flex justify-between">
         <h1 className="text-xl mb-4 font-bold">Wallets</h1>
         <Link href="/wallets/add">
           <button className="border-none rounded-full w-10 h-10 bg-primary-800 text-white shadow-primary-950 shadow">
@@ -60,10 +60,10 @@ export default function WalletsPage() {
               </p>
             </div>
             <button
-              className="bg-primary-700 text-white border-none shadow shadow-primary-900"
+              className="text-red-500 border-none"
               onClick={() => handleDelete(wallet.id)}
             >
-              Delete
+              X
             </button>
           </div>
         ))}

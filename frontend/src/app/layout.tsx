@@ -18,13 +18,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + ' bg-primary-100'}>
-        <nav className="p-4 bg-primary-800  text-white">
-          <ul className="flex gap-2">
-            <li className="hover:text-primary-500 ">
+        <nav className="p-4 bg-primary-800  text-white flex items-center">
+          <div className="font-bold text-2xl mr-4 font-serif italic">SS</div>
+          <ul className="flex gap-3">
+            <li className="hover:text-primary-500 list-none">
               <Link href="/">Expenses</Link>
             </li>
-            <li className="hover:text-primary-500 ">
+            <li className="hover:text-primary-500 list-none">
               <Link href="/wallets">Wallets</Link>
+            </li>
+            <li className="text-transparent hover:text-primary-50  list-none ml-auto">
+              <Link href="/insights">Insights</Link>
             </li>
           </ul>
         </nav>
