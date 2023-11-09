@@ -24,4 +24,8 @@ public class WalletService {
         walletRepository.findAll().forEach(a -> wallets.add(new WalletResponseDto(a.getId(), a.getName(), a.getBalance())));
         return wallets;
     }
+
+    public WalletResponseDto findById(String id) {
+        return walletRepository.findById(id).map(a -> new WalletResponseDto(a.getId(), a.getName(), a.getBalance())).orElseThrow();
+    }
 }
