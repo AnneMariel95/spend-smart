@@ -1,6 +1,7 @@
 package com.annemariel.backend.expense;
 
 import com.annemariel.backend.expense.dto.ExpenseRequestDto;
+import com.annemariel.backend.expense.dto.ExpenseRequestUpdateDto;
 import com.annemariel.backend.expense.dto.ExpenseResponseDto;
 import com.annemariel.backend.user.User;
 import com.annemariel.backend.user.UserRepository;
@@ -49,5 +50,14 @@ public class ExpenseService {
         acc.setBalance(acc.getBalance() - exp.getAmount());
         walletRepository.save(acc);
         return new ExpenseResponseDto(exp.getId(), exp.getAmount(), exp.getCategory(), exp.getDate());
+    }
+
+    public ExpenseResponseDto updateExpense(String id, ExpenseRequestUpdateDto dto) {
+        Expense expense = expenseRepository.findById((id)).orElseThrow();
+        expense.setCategory(dto.category());
+        expense.setAmount(dto.amount());
+        expense.setDate(dto.date());
+        expenseRepository.save(expense);
+        return new ExpenseResponseDto(expense.getId(), expense.getAmount(), expense.getCategory(), expense.getDate());
     }
 }

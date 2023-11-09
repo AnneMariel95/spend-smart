@@ -1,6 +1,7 @@
 package com.annemariel.backend.expense;
 
 import com.annemariel.backend.expense.dto.ExpenseRequestDto;
+import com.annemariel.backend.expense.dto.ExpenseRequestUpdateDto;
 import com.annemariel.backend.expense.dto.ExpenseResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class ExpenseController {
     public ResponseEntity<ExpenseResponseDto> createExpense(@RequestBody ExpenseRequestDto dto) {
         ExpenseResponseDto createdExpense = expenseService.createExpense(dto);
         return ResponseEntity.created(URI.create("/api/expenses/" + createdExpense.id())).body(createdExpense);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ExpenseResponseDto> updateExpense(@PathVariable String id, @RequestBody ExpenseRequestUpdateDto dto) {
+        return ResponseEntity.ok(expenseService.updateExpense(id, dto));
     }
 }
