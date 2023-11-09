@@ -1,7 +1,10 @@
 package com.annemariel.backend.expense;
 
+import com.annemariel.backend.expense.dto.ExpenseRequestDto;
 import com.annemariel.backend.expense.dto.ExpenseResponseDto;
+import com.annemariel.backend.user.User;
 import com.annemariel.backend.user.UserRepository;
+import com.annemariel.backend.wallet.Wallet;
 import com.annemariel.backend.wallet.WalletRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +39,15 @@ public class ExpenseService {
 
     public ExpenseResponseDto findById(String id) {
         return expenseRepository.findById(id).map(e -> new ExpenseResponseDto(e.getId(), e.getAmount(), e.getCategory(), e.getDate())).orElseThrow();
+    }
+
+    public ExpenseResponseDto createExpense(ExpenseRequestDto dto) {
+        User user = userRepository.findById(dto.userId()).orElseThrow();
+        Wallet acc = walletRepository.findById(dto.walletId()).orElseThrow();
+        Expense exp = new Expense(dto.category(), dto.amount(), dto.date(), acc, user);
+        expenseRepository.save(exp);
+        acc.setBalance(acc.getBalance() - exp.getAmount());
+        walletRepository.save(acc);
+        return new ExpenseResponseDto(exp.getId(), exp.getAmount(), exp.getCategory(), exp.getDate());
     }
 }
