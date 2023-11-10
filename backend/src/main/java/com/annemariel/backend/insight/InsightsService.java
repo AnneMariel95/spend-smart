@@ -28,7 +28,6 @@ public class InsightsService {
         String apiKey = "";
         String sessionID = "";
 
-        // Prepare the request body
         Map<String, Object> body = new HashMap<>();
         body.put("apiKey", apiKey);
         body.put("sessionID", sessionID);
@@ -39,17 +38,13 @@ public class InsightsService {
         history.add(userHistory);
         body.put("history", history);
 
-        // Create headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        // Create a new HttpEntity
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        // Create a new RestTemplate instance
         RestTemplate restTemplate = new RestTemplate();
 
-        // Send the POST request
         ResponseEntity<String> response = restTemplate.exchange(
                 "https://api.afforai.com/api/api_completion",
                 HttpMethod.POST,
