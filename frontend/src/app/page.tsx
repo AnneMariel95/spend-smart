@@ -56,7 +56,9 @@ export default function ExpensesPage() {
         <tbody>
           {expenses.map((expense) => (
             <tr key={expense.id} className="border-y-2 border-primary-600">
-              <td>{expense.date}</td>
+              <td>
+                <Link href={`/expenses/${expense.id}`}>{expense.date}</Link>
+              </td>
               <td>{expense.category}</td>
               <td>
                 {expense.amount.toLocaleString('en-US', {
